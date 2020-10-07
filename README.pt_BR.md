@@ -104,7 +104,7 @@ De todos esses, apenas os seguintes são obrigatórios:
 
 ![screen two][sc_two]
 
-Espero que este plugin possa ajudar você. Se ele foi útil, considere pagar-me um café, obrigado! [ByMeACoffee][bmc]
+Espero que este plugin possa ajudar você. Se ele foi útil, considere pagar-me um café, obrigado! [BuyMeACoffee][bmc]
 
 Disponível sob licensa MIT. [Licensa][license]
 
@@ -112,6 +112,6 @@ Disponível sob licensa MIT. [Licensa][license]
 [sc_one]: ./screenshots/one_sc.png "Screenshot One"
 [sc_two]: ./screenshots/two_sc.png "Screenshot Two"
 
-[bmc]: https://buymeacoff.ee/gianscardua "By Me A Coffee"
+[bmc]: https://buymeacoff.ee/gianscardua "Buy Me A Coffee"
 [license]: LICENSE "Licensa"
 [en_version]: README.md "English Version"
