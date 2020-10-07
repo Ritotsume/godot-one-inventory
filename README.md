@@ -114,4 +114,4 @@ Available under MIT license. [License][license]
 
 [bmc]: https://buymeacoff.ee/gianscardua "By Me A Coffee"
 [license]: LICENSE "License"
-[pt_br]: README_pt_br.md "pt_BR"
+[pt_br]: README.pt_BR.md "pt_BR"
