@@ -1,0 +1,160 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/godot-one-inventory/scripts/drop_box.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot-one-inventory/fonts/octin_stencil_rg.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/godot-one-inventory/item_slot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/godot-one-inventory/sprites/buttonNormal.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 39
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 39
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 39
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 39
+font_data = ExtResource( 2 )
+
+[node name="dropbox" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="background" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0.658824 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.594482
+margin_right = -0.594482
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="box" type="Panel" parent="background"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -524.5
+margin_top = -244.5
+margin_right = 524.5
+margin_bottom = 244.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title_box" type="Panel" parent="background/box"]
+anchor_right = 1.0
+anchor_bottom = 0.197
+margin_bottom = 0.0559978
+
+[node name="title" type="Label" parent="background/box/title_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.831373, 0, 1 )
+text = "DESCARTAR"
+align = 1
+valign = 1
+
+[node name="slot" parent="background/box" instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+margin_left = 48.0
+margin_top = -100.0
+margin_right = 248.0
+margin_bottom = 100.0
+
+[node name="item_name" type="Label" parent="background/box"]
+margin_left = 281.0
+margin_top = 142.0
+margin_right = 1012.0
+margin_bottom = 190.0
+custom_fonts/font = SubResource( 2 )
+text = "Armadura Pesada de Gundar"
+valign = 1
+
+[node name="amount_slider" type="HSlider" parent="background/box"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -239.0
+margin_top = -8.0
+margin_right = 303.0
+margin_bottom = 8.0
+
+[node name="amount_box" type="LineEdit" parent="background/box"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -186.0
+margin_top = -29.0
+margin_right = -32.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 3 )
+text = "2345"
+align = 1
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="drop" type="TextureButton" parent="background/box"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -121.5
+margin_top = -124.0
+margin_right = 175.5
+margin_bottom = -30.0
+texture_normal = ExtResource( 4 )
+expand = true
+
+[node name="text" type="Label" parent="background/box/drop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "descartar"
+align = 1
+valign = 1
+
+[node name="cancel" type="TextureButton" parent="background/box"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -327.0
+margin_top = -124.0
+margin_right = -30.0
+margin_bottom = -30.0
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text" type="Label" parent="background/box/cancel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 5 )
+text = "cancelar"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="background/box/amount_slider" to="." method="_on_amount_slider_value_changed"]
+[connection signal="text_changed" from="background/box/amount_box" to="." method="_on_amount_box_text_changed"]
+[connection signal="button_up" from="background/box/cancel" to="." method="_on_cancel_button_up"]

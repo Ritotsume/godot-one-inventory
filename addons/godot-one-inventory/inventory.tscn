@@ -1,0 +1,333 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://addons/godot-one-inventory/sprites/close.png" type="Texture" id=2]
+[ext_resource path="res://addons/godot-one-inventory/fonts/octin_stencil_rg.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://addons/godot-one-inventory/scripts/inventory_scene.gd" type="Script" id=4]
+[ext_resource path="res://addons/godot-one-inventory/scripts/equips_slot.gd" type="Script" id=7]
+[ext_resource path="res://addons/godot-one-inventory/drop_box.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/godot-one-inventory/sprites/moeda.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 87
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 35
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 45
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 33
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 39
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 35
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+border_width_top = 1
+border_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 39
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 39
+font_data = ExtResource( 3 )
+
+[node name="inventory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+self_modulate = Color( 0, 0, 0, 0.729412 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Panel" parent="."]
+margin_right = 1920.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 1024, 76 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lb_title" type="Label" parent="title"]
+anchor_right = 0.915
+anchor_bottom = 1.0
+margin_right = -0.800049
+custom_fonts/font = SubResource( 1 )
+text = "INVENTORY"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_close" type="TextureButton" parent="title"]
+margin_left = 1794.0
+margin_top = 10.0
+margin_right = 1893.0
+margin_bottom = 114.0
+texture_normal = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="separate" type="HSplitContainer" parent="."]
+margin_left = 9.0
+margin_top = 133.0
+margin_right = 1910.0
+margin_bottom = 1070.0
+split_offset = 1226
+dragger_visibility = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="items" type="VSplitContainer" parent="separate"]
+margin_right = 1234.0
+margin_bottom = 937.0
+split_offset = 615
+dragger_visibility = 1
+
+[node name="panel_items" type="TabContainer" parent="separate/items"]
+margin_right = 1234.0
+margin_bottom = 680.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="consumable" type="ScrollContainer" parent="separate/items/panel_items"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 61.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="consumable" type="GridContainer" parent="separate/items/panel_items/consumable"]
+custom_constants/vseparation = 5
+custom_constants/hseparation = 4
+columns = 6
+
+[node name="equipments" type="ScrollContainer" parent="separate/items/panel_items"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 61.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="equipments" type="GridContainer" parent="separate/items/panel_items/equipments"]
+columns = 6
+
+[node name="item_desc" type="Panel" parent="separate/items"]
+margin_top = 692.0
+margin_right = 1234.0
+margin_bottom = 937.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="name" type="Label" parent="separate/items/item_desc"]
+margin_left = 9.0
+margin_top = 2.0
+margin_right = 930.0
+margin_bottom = 69.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 0.831373, 0, 1 )
+custom_colors/font_color_shadow = Color( 1, 0.831373, 0, 1 )
+text = "Item name"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="desc" type="RichTextLabel" parent="separate/items/item_desc"]
+margin_left = 10.0
+margin_top = 67.0
+margin_right = 923.0
+margin_bottom = 232.0
+custom_fonts/normal_font = SubResource( 4 )
+text = "Descriçao do item"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="use" type="TextureButton" parent="separate/items/item_desc"]
+anchor_left = 0.862
+anchor_top = 0.275
+anchor_right = 0.862
+anchor_bottom = 0.275
+margin_left = -112.12
+margin_top = 65.6
+margin_right = 126.88
+margin_bottom = 130.6
+texture_normal = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="separate/items/item_desc/use"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 5 )
+text = "Usar"
+align = 1
+valign = 1
+
+[node name="drop" type="TextureButton" parent="separate/items/item_desc"]
+anchor_left = 0.859
+anchor_top = 0.234
+anchor_right = 0.859
+anchor_bottom = 0.234
+margin_left = -108.465
+margin_top = -8.994
+margin_right = 130.535
+margin_bottom = 56.006
+texture_normal = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="separate/items/item_desc/drop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 5 )
+text = "drop"
+align = 1
+valign = 1
+
+[node name="equipments_side" type="Panel" parent="separate"]
+margin_left = 1246.0
+margin_right = 1901.0
+margin_bottom = 937.0
+
+[node name="equip_title" type="Label" parent="separate/equipments_side"]
+anchor_right = 1.0
+anchor_bottom = 0.112
+margin_bottom = 0.216
+custom_fonts/font = SubResource( 6 )
+text = "equips"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="equipset" type="Panel" parent="separate/equipments_side"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 400, 400 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="equipset" type="TextureButton" parent="separate/equipments_side/equipset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 100 )
+expand = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="item" type="Label" parent="separate/equipments_side/equipset/equipset"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 7 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="money" type="Panel" parent="separate/equipments_side"]
+anchor_top = 0.892
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.244019
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="image" type="TextureButton" parent="separate/equipments_side/money"]
+margin_left = 11.0
+margin_top = 5.0
+margin_right = 70.0
+margin_bottom = 98.0
+disabled = true
+texture_normal = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text" type="Label" parent="separate/equipments_side/money"]
+anchor_left = 0.131
+anchor_right = 0.385
+anchor_bottom = 1.0
+margin_left = 0.194992
+margin_right = -0.175018
+margin_bottom = -0.116028
+custom_fonts/font = SubResource( 9 )
+text = "money"
+valign = 1
+
+[node name="amount" type="Label" parent="separate/equipments_side/money"]
+anchor_left = 0.481
+anchor_right = 0.957
+anchor_bottom = 1.0
+margin_left = -0.0550232
+margin_right = 0.164978
+margin_bottom = -0.116028
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 1, 0.831373, 0, 1 )
+text = "25"
+align = 2
+valign = 1
+
+[node name="dropbox" parent="." instance=ExtResource( 8 )]
+[connection signal="button_up" from="title/bt_close" to="." method="_on_bt_close_button_up"]
+[connection signal="tab_changed" from="separate/items/panel_items" to="." method="_on_panel_items_tab_changed"]

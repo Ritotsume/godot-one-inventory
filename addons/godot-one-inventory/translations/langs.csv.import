@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://addons/godot-one-inventory/translations/langs.en.translation", "res://addons/godot-one-inventory/translations/langs.pt_BR.translation" ]
+
+source_file="res://addons/godot-one-inventory/translations/langs.csv"
+dest_files=[ "res://addons/godot-one-inventory/translations/langs.en.translation", "res://addons/godot-one-inventory/translations/langs.pt_BR.translation" ]
+
+[params]
+
+compress=true
+delimiter=0
