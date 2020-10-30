@@ -13,7 +13,7 @@ O que pretendo adicionar:
 
 - tela de background personalizada totalmente funcional.
 - reorganizar os itens com drag and drop.
-- possibilitar equipamentos separados, por exemplo: arma, elmo, armadura, botas, luvas.
+- <del>possibilitar equipamentos separados, por exemplo: arma, elmo, armadura, botas, luvas.</del>
 - mais opções de personalização.
 - e outras coisinhas que devo adicionar aqui futuramente.
 
@@ -37,7 +37,7 @@ O plugin possui algumas script vars:
 
 **Item Types:** Por padrão esse plugin aceita 3 tipos de itens.
 - **Consumable:** Itens consumíveis, tais como: poções, elixires, etc.
-- **Equipments:** Equipamentos: armaduras.
+- **Equipments:** Equipamentos: elmos, armaduras, luvas, botas e armas.
 - **Usable:** Itens de progressão, itens que poderão ou não ser usados dependendo do avanço na aventura (game).
 
 >Atenção: os `item types` devem ser condizentes com o que estiver em `attrib.type`.
@@ -52,7 +52,7 @@ Para uso desse plugin espera-se que o item a ser inserido tenha a seguinte estru
         "amount": 1,
         "attrib": {
             "type": 1,
-            "affect": "equipset",
+            "affect": "body",
             "effect": "defense",
             "value": 12
         }
@@ -79,11 +79,15 @@ De todos esses, apenas os seguintes são obrigatórios:
 - **amount:** O item deve conter uma quantidade > 0.
 - **attrib.type:** O item precisar ter um tipo, caso seja equipamentos utilizar o painel com as *script vars* e especificar os tipos: *equipments*, *consumable*, *usable*. De modo que fiquem coerentes com os itens que serão inseridos no inventário. Por exemplo, posso ter uma **enum** que possua esses valores, com isso, vou definir em *script vars* os respectivos valores para cada um, o plugin fará o resto.
 
+>Caso **attrib.type** seja do tipo equipamento, então, **attrib.affect** deverá ser: _head_, _body_, _legs_, _hands_ ou _weapon_. Nesse caso, **attrib.affect** já é autoexplicativo.
+
 ## Instalação
 
 1. Copie a pasta *addons* para a raiz do projeto.
-2. Habilite o plugin em (Configurações do Projeto > Plugins).
-3. Parabéns! Agora você pode usar o plugin.
+2. Habilite o plugin em `Configurações do Projeto > Plugins`.
+3. Vá até a pasta `translations` (`addons/godot-one-inventory/translations`), selecione o arquivo `langs.csv`, vá até a aba `Import` e clique no botão `Reimportar`.
+4. Habilite as traduções em `Configurações do Projeto > Localização` clicando no botão `Adicionar...` e navegando até a pasta (`addons/godot-one-inventory/translations`) adicionando os arquivos `langs.en.translation` e `langs.pt_BR.translation`.
+5. Parabéns! Agora você pode usar o plugin.
 
 ## Usando o plugin
 
@@ -104,13 +108,18 @@ De todos esses, apenas os seguintes são obrigatórios:
 
 ![screen two][sc_two]
 
+![screen three][sc_three]
+
 Espero que este plugin possa ajudar você. Se ele foi útil, considere pagar-me um café, obrigado! [BuyMeACoffee][bmc]
 
-Disponível sob licensa MIT. [Licensa][license]
+## Licensa
+
+MIT. [Licensa][license]
 
 [script_vars]: ./screenshots/script_vars.png "Script Vars"
-[sc_one]: ./screenshots/one_sc.png "Screenshot One"
-[sc_two]: ./screenshots/two_sc.png "Screenshot Two"
+[sc_one]: ./screenshots/one_sc.jpg "Screenshot One"
+[sc_two]: ./screenshots/two_sc.jpg "Screenshot Two"
+[sc_three]: ./screenshots/three_sc.jpg "Screenshot Three"
 
 [bmc]: https://buymeacoff.ee/gianscardua "Buy Me A Coffee"
 [license]: LICENSE "Licensa"
