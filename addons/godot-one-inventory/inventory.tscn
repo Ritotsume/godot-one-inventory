@@ -232,6 +232,10 @@ valign = 1
 margin_left = 1246.0
 margin_right = 1901.0
 margin_bottom = 937.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="equip_title" type="Label" parent="separate/equipments_side"]
 anchor_right = 1.0
@@ -245,23 +249,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="equipset" type="Panel" parent="separate/equipments_side"]
+[node name="head" type="Panel" parent="separate/equipments_side"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -200.0
-margin_right = 200.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 400, 400 )
+margin_left = 48.5
+margin_top = -356.5
+margin_right = 248.5
+margin_bottom = -156.5
+rect_min_size = Vector2( 200, 200 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="equipset" type="TextureButton" parent="separate/equipments_side/equipset"]
+[node name="head" type="TextureButton" parent="separate/equipments_side/head"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 100, 100 )
@@ -271,7 +273,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="item" type="Label" parent="separate/equipments_side/equipset/equipset"]
+[node name="item" type="Label" parent="separate/equipments_side/head/head"]
 self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -281,6 +283,118 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="body" type="Panel" parent="separate/equipments_side"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 48.5
+margin_top = -116.5
+margin_right = 248.5
+margin_bottom = 83.5001
+rect_min_size = Vector2( 200, 200 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="body" type="TextureButton" parent="separate/equipments_side/body"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 100 )
+expand = true
+script = ExtResource( 7 )
+
+[node name="item" type="Label" parent="separate/equipments_side/body/body"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+align = 1
+valign = 1
+
+[node name="legs" type="Panel" parent="separate/equipments_side"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 48.5
+margin_top = 123.5
+margin_right = 248.5
+margin_bottom = 323.5
+rect_min_size = Vector2( 200, 200 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="legs" type="TextureButton" parent="separate/equipments_side/legs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 100 )
+expand = true
+script = ExtResource( 7 )
+
+[node name="item" type="Label" parent="separate/equipments_side/legs/legs"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+align = 1
+valign = 1
+
+[node name="hands" type="Panel" parent="separate/equipments_side"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -195.5
+margin_top = -116.5
+margin_right = 4.5
+margin_bottom = 83.5001
+rect_min_size = Vector2( 200, 200 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hands" type="TextureButton" parent="separate/equipments_side/hands"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 100 )
+expand = true
+script = ExtResource( 7 )
+
+[node name="item" type="Label" parent="separate/equipments_side/hands/hands"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+align = 1
+valign = 1
+
+[node name="weapon" type="Panel" parent="separate/equipments_side"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -195.5
+margin_top = 123.5
+margin_right = 4.5
+margin_bottom = 323.5
+rect_min_size = Vector2( 200, 200 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="weapon" type="TextureButton" parent="separate/equipments_side/weapon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 100 )
+expand = true
+script = ExtResource( 7 )
+
+[node name="item" type="Label" parent="separate/equipments_side/weapon/weapon"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+align = 1
+valign = 1
 
 [node name="money" type="Panel" parent="separate/equipments_side"]
 anchor_top = 0.892

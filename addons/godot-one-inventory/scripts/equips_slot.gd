@@ -57,6 +57,12 @@ func drop_data(position, data):
 func on_head_button_up(item):
 	var button = owner_node.get_node("separate/items/item_desc/use")
 	var dropButton = owner_node.get_node("separate/items/item_desc/drop")
+	var panel_equips = owner_node.get_node("separate/equipments_side")
+	for panel in panel_equips.get_children():
+		if panel.get_child_count() > 0 and panel.get_child(0).get_name() != self.get_name():
+			owner_node.disconnect_signals(button, "button_up", self, "unequip_item")
+			owner_node.slot_empty(panel)
+			owner_node.hide_item_desc()
 	owner_node.disconnect_signals(button, "button_up", owner_node, "_equip_item")
 	owner_node.disconnect_signals(button, "button_up", owner_node, "_use_item")
 	owner_node.disconnect_signals(dropButton, "button_up", owner_node, "_equip_drop")
@@ -94,4 +100,4 @@ func unequip_item(button, owner_button):
 #	# necessary cleaning...
 	owner_node.hide_item_desc()
 	owner_node.slot_empty(button.get_parent())
-	owner_node.unequip_item()
+	owner_node.unequip_item(previous_item)

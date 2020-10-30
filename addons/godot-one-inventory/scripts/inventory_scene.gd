@@ -19,7 +19,11 @@ onready var consumables = $separate/items/panel_items/consumable/consumable
 onready var equipments = $separate/items/panel_items/equipments/equipments
 onready var use = $separate/items/item_desc/use
 onready var drop = $separate/items/item_desc/drop
-onready var equip_set = $separate/equipments_side/equipset/equipset
+onready var head = $separate/equipments_side/head/head
+onready var body = $separate/equipments_side/body/body
+onready var hands = $separate/equipments_side/hands/hands
+onready var legs = $separate/equipments_side/legs/legs
+onready var weapon = $separate/equipments_side/weapon/weapon
 onready var dropbox = $dropbox
 onready var money_panel = $separate/equipments_side/money
 onready var money_image = $separate/equipments_side/money/image
@@ -60,6 +64,8 @@ func _init():
 	load_inventory()
 
 func _ready():
+	var parent_position = get_parent().position
+	set_position(Vector2(-parent_position.x, -parent_position.y))
 	title.text = tr("TITLE")
 	tabs.set_tab_title(0, tr("TAB1"))
 	tabs.set_tab_title(1, tr("TAB2"))
@@ -179,12 +185,20 @@ func _item_selected(panel: Panel, itemStr: String):
 	disconnect_signals(use, "button_up", self, "_equip_item")
 	disconnect_signals(drop, "button_up", self, "_use_drop")
 	disconnect_signals(drop, "button_up", self, "_equip_drop")
-	disconnect_signals(use, "button_up", equip_set, "unequip_item")
+	disconnect_signals(use, "button_up", head, "unequip_item")
+	disconnect_signals(use, "button_up", body, "unequip_item")
+	disconnect_signals(use, "button_up", hands, "unequip_item")
+	disconnect_signals(use, "button_up", legs, "unequip_item")
+	disconnect_signals(use, "button_up", weapon, "unequip_item")
 	
 	# show the item description
 	show_item_desc(itemStr)
 	
-	slot_empty(equip_set.get_parent())
+	slot_empty(head.get_parent())
+	slot_empty(body.get_parent())
+	slot_empty(hands.get_parent())
+	slot_empty(legs.get_parent())
+	slot_empty(weapon.get_parent())
 	
 	panel.add_stylebox_override("panel", stylesGreen)
 	previous.add_stylebox_override("panel", stylesGray)
@@ -227,9 +241,10 @@ func _use_item(panel: Panel):
 ## An item is equipped, emit signal for the equipped item
 ##
 func _equip_item(panel: Panel):
-	var slot = get_node("separate/equipments_side/equipset")
+#	var slot = get_node("separate/equipments_side/equipset")
 	var itemKey = panel.get_node("img_item/item").text
 	var item = get_item(itemKey)
+	var slot = _get_slot(item.attrib.affect)
 	
 	# if the affect attribute is equals "equipset", equip then
 	if item.attrib.affect == slot.get_name():
@@ -285,7 +300,11 @@ func _on_panel_items_tab_changed(tab):
 	disconnect_signals(drop, "button_up", self, "_use_drop")
 	disconnect_signals(use, "button_up", self, "_equip_item")
 	disconnect_signals(drop, "button_up", self, "_equip_drop")
-	slot_empty(equip_set.get_parent())
+	slot_empty(head.get_parent())
+	slot_empty(body.get_parent())
+	slot_empty(hands.get_parent())
+	slot_empty(legs.get_parent())
+	slot_empty(weapon.get_parent())
 
 ##
 ## The button close was clicked, close inventory
@@ -316,6 +335,26 @@ func _update_consume_slot_with_new_item(itemKey: String):
 func _update_equip_slot_with_new_item(itemKey: String):
 	var slot = get_free_equip_slot()
 	_fill_slot(slot, itemKey)
+
+##
+## Function that get slot for equip an item
+##
+func _get_slot(affect: String):
+	var slot
+	match affect:
+		"head":
+			slot = get_node("separate/equipments_side/head")
+		"body":
+			slot = get_node("separate/equipments_side/body")
+		"legs":
+			slot = get_node("separate/equipments_side/legs")
+		"hands":
+			slot = get_node("separate/equipments_side/hands")
+		"weapon":
+			slot = get_node("separate/equipments_side/weapon")
+		_:
+			return false
+	return slot
 
 ##
 ## Save inventory
@@ -497,35 +536,40 @@ func pay(amount: int) -> int:
 ## Set equipment
 ##
 func set_equip(key: String, equip: Dictionary):
-	items["equips"] = {
-		key: equip
-	}
+	items.equips[key] = equip
 	save_inventory() ### para testes, depois deverá ser mudado...
 
 ##
 ## Get the equipped item
 ##
-func get_equipped_item() -> Dictionary:
+func get_equipped_items() -> Dictionary:
 	return items.equips
 
 ##
 ## Fill the equipset slot with the equipped item, emit signal to use their bonuses
 ##
 func load_equip():
-	var slot = get_node("separate/equipments_side/equipset")
-	var item = get_equipped_item()
-	if item.size() > 0:
-		var key = item.keys()[0]
-		slot.get_child(0).texture_normal = load(item[key].icon)
-		slot.get_child(0).get_node("item").set_text(key)
-		slot.get_child(0).connect("button_up", slot.get_child(0), "on_head_button_up", [key])
-		emit_signal("equipped_item", item[key])
+	var slot # = get_node("separate/equipments_side/equipset")
+	var items_equip = get_equipped_items()
+#	print("ITENS::: ", items_equip)
+	if items_equip.size() > 0:
+		for key in items_equip:
+#			print("ITEM>> ", key)
+			slot = _get_slot(items_equip[key].attrib.affect)
+#			var key = item.keys()[0]
+			slot.get_child(0).texture_normal = load(items_equip[key].icon)
+			slot.get_child(0).get_node("item").set_text(key)
+			slot.get_child(0).connect("button_up", slot.get_child(0), "on_head_button_up", [key])
+			emit_signal("equipped_item", items_equip[key])
 
 ##
 ## Unequip the item in equipset
 ##
-func unequip_item():
-	items.equips.clear()
+func unequip_item(item: String):
+#	print("UNEQUIP>>> ", item)
+	items.equips.erase(item)
+#	print("EQUIPEDS>>> ", items.equips)
+#	items.equips.clear()
 	save_inventory() ### para testes, depois deverá ser mudado...
 
 ##
